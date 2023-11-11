@@ -1,0 +1,16 @@
+[Unit]
+Description=myip
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=myip
+Group=myip
+WorkingDirectory=/home/myip/app
+EnvironmentFile=/home/myip/app/.env
+ExecStart=/home/myip/app/.venv/bin/gunicorn app:app
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
