@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>What is my IP address?</title>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">What is my IP address?</h1>
+    <div class="row">
+      <div class="col is-center">
+        <div class="grouped is-vertical-align">
+          <input id="ip-address" type="text" value="{{ request.remote_addr }}" size="40" readonly class="bd-primary text-center">
+          <button id="copy-ip-address" type="button" class="button primary">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
