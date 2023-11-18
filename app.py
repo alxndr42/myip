@@ -2,12 +2,14 @@ from enum import Enum
 import os
 
 from flask import Flask, render_template, request
+from flask_cors import CORS
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 app = Flask(__name__)
 if os.environ.get('MYIP_PROXY') == 'true':
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+CORS(app)
 
 
 class ResponseType(Enum):
@@ -21,7 +23,17 @@ class ResponseType(Enum):
 def root():
     response_type = get_response_type()
     if response_type == ResponseType.HTML:
-        body = render_template('root.html')
+        context = {
+            'ipv4_addr': '',
+            'ipv6_addr': '',
+            'ipv4_url': os.environ.get('MYIP_IPV4_URL', ''),
+            'ipv6_url': os.environ.get('MYIP_IPV6_URL', ''),
+        }
+        if ':' in request.remote_addr:
+            context['ipv6_addr'] = request.remote_addr
+        else:
+            context['ipv4_addr'] = request.remote_addr
+        body = render_template('root.html', **context)
         headers = {'Cache-Control': 'no-store'}
     elif response_type == ResponseType.JSON:
         body = {'ip': request.remote_addr}

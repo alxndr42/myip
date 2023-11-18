@@ -9,14 +9,42 @@
 <body>
   <div class="container">
     <h1 class="text-center">What is my IP address?</h1>
+{% if ipv4_addr or ipv4_url %}
     <div class="row">
       <div class="col is-center">
         <div class="grouped is-vertical-align">
-          <input id="ip-address" type="text" value="{{ request.remote_addr }}" size="40" readonly class="bd-primary text-center">
-          <button id="copy-ip-address" type="button" class="button primary">Copy</button>
+          <strong>IPv4</strong>
+          <input
+            id="ipv4-addr"
+            type="text"
+            value="{{ ipv4_addr }}"
+            size="40"
+            readonly
+            data-url="{{ ipv4_url }}"
+            class="bd-primary text-center">
+          <button id="ipv4-copy" type="button" class="button primary">Copy</button>
         </div>
       </div>
     </div>
+{% endif %}
+{% if ipv6_addr or ipv6_url %}
+    <div class="row">
+      <div class="col is-center">
+        <div class="grouped is-vertical-align">
+          <strong>IPv6</strong>
+          <input
+            id="ipv6-addr"
+            type="text"
+            value="{{ ipv6_addr }}"
+            size="40"
+            readonly
+            data-url="{{ ipv6_url }}"
+            class="bd-primary text-center">
+          <button id="ipv6-copy" type="button" class="button primary">Copy</button>
+        </div>
+      </div>
+    </div>
+{% endif %}
   </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
