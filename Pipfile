@@ -12,4 +12,4 @@ gunicorn = "*"
 pycodestyle = "*"
 
 [requires]
-python_version = "3.10" # .python-version
+python_version = "3.12" # .python-version
