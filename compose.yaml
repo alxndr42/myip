@@ -1,0 +1,10 @@
+services:
+  myip:
+    ports:
+      - "${DOCKER_PORT}:8000"
+    environment:
+      MYIP_IPV4_URL: "${MYIP_IPV4_URL}"
+      MYIP_IPV6_URL: "${MYIP_IPV6_URL}"
+      MYIP_PROXY: "${MYIP_PROXY}"
+    build:
+      context: .

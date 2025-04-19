@@ -1,0 +1,10 @@
+# Exclude all
+*
+
+# Include folders
+!static/
+!templates/
+
+# Include files
+!*.py
+!Pipfile*

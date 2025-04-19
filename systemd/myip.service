@@ -1,14 +1,12 @@
 [Unit]
 Description=myip
-Wants=network-online.target
-After=network-online.target
+Wants=network-online.target docker.service
+After=network-online.target docker.service
 
 [Service]
-User=myip
-Group=myip
-WorkingDirectory=/home/myip/app
-EnvironmentFile=/home/myip/app/.env
-ExecStart=/home/myip/app/.venv/bin/gunicorn app:app
+WorkingDirectory=/srv/myip
+ExecStart=docker compose up --build
+ExecStop=docker compose down
 Restart=on-failure
 RestartSec=30
 
