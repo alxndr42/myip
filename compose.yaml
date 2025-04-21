@@ -1,5 +1,9 @@
+name: myip
+
 services:
   myip:
+    container_name: myip
+    hostname: myip.local
     ports:
       - "${DOCKER_PORT}:8000"
     environment:
